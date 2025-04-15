@@ -1,116 +1,165 @@
-import { useState, useEffect } from "react";
-import Sidebar from "../components/Sidebar";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function CadastroProdutoPage() {
+const CadastroProdutoPage = () => {
   const [nome, setNome] = useState("");
   const [preco, setPreco] = useState("");
   const [quantidade, setQuantidade] = useState("");
   const [produtos, setProdutos] = useState([]);
+  const [mensagem, setMensagem] = useState("");
+  const [editando, setEditando] = useState(false);
+  const [produtoId, setProdutoId] = useState(null);
 
-  // Função para adicionar produto
-  const handleAdicionar = async () => {
-    if (!nome || !preco || !quantidade) {
-      alert("Preencha todos os campos!");
-      return;
-    }
+  useEffect(() => {
+    buscarProdutos();
+  }, []);
 
-    try {
-      const response = await axios.post("http://localhost:5000/api/produtos", {
-        nome,
-        preco: parseFloat(preco),
-        quantidade: parseInt(quantidade),
-      });
-      setProdutos([...produtos, response.data]);
-      setNome("");
-      setPreco("");
-      setQuantidade("");
-    } catch (error) {
-      console.error("Erro ao adicionar produto:", error);
-      alert("Erro ao adicionar o produto");
-    }
-  };
-
-  // Função para listar os produtos
-  const listarProdutos = async () => {
+  const buscarProdutos = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/produtos");
       setProdutos(response.data);
     } catch (error) {
-      console.error("Erro ao listar produtos:", error);
+      console.error("Erro ao buscar produtos:", error);
     }
   };
 
-  // Carregar produtos quando a página for carregada
-  useEffect(() => {
-    listarProdutos();
-  }, []);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      if (editando) {
+        await axios.put(`http://localhost:5000/api/produtos/${produtoId}`, {
+          nome,
+          preco: parseFloat(preco),
+          quantidade: parseInt(quantidade),
+        });
+        setMensagem("Produto atualizado com sucesso!");
+      } else {
+        await axios.post("http://localhost:5000/api/produtos", {
+          nome,
+          preco: parseFloat(preco),
+          quantidade: parseInt(quantidade),
+        });
+        setMensagem("Produto cadastrado com sucesso!");
+      }
+
+      setNome("");
+      setPreco("");
+      setQuantidade("");
+      setEditando(false);
+      setProdutoId(null);
+      buscarProdutos();
+    } catch (error) {
+      setMensagem("Erro ao cadastrar/editar o produto.");
+      console.error(error);
+    }
+  };
+
+  const excluirProduto = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/produtos/${id}`);
+      setMensagem("Produto excluído com sucesso!");
+      buscarProdutos();
+    } catch (error) {
+      console.error("Erro ao excluir produto:", error);
+    }
+  };
+
+  const iniciarEdicao = (produto) => {
+    setNome(produto.nome);
+    setPreco(produto.preco);
+    setQuantidade(produto.quantidade);
+    setProdutoId(produto.id);
+    setEditando(true);
+  };
 
   return (
-    <div className="flex h-screen">
-      <Sidebar />
-      <main className="flex-1 p-6 bg-gray-100">
-        <h1 className="text-2xl font-bold mb-4">Cadastro de Produtos</h1>
+    <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded shadow">
+      <h2 className="text-2xl font-bold mb-6">
+        {editando ? "Editar Produto" : "Cadastro de Produto"}
+      </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      {mensagem && <p className="mb-4 text-green-600">{mensagem}</p>}
+
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label className="block mb-1 font-semibold">Nome:</label>
           <input
             type="text"
-            placeholder="Nome do produto"
             value={nome}
             onChange={(e) => setNome(e.target.value)}
-            className="border p-2 rounded"
+            className="w-full border rounded px-3 py-2"
+            required
           />
+        </div>
+
+        <div className="mb-4">
+          <label className="block mb-1 font-semibold">Preço:</label>
           <input
             type="number"
-            placeholder="Preço"
+            step="0.01"
             value={preco}
             onChange={(e) => setPreco(e.target.value)}
-            className="border p-2 rounded"
+            className="w-full border rounded px-3 py-2"
+            required
           />
+        </div>
+
+        <div className="mb-4">
+          <label className="block mb-1 font-semibold">Quantidade:</label>
           <input
             type="number"
-            placeholder="Quantidade"
             value={quantidade}
             onChange={(e) => setQuantidade(e.target.value)}
-            className="border p-2 rounded"
+            className="w-full border rounded px-3 py-2"
+            required
           />
         </div>
 
         <button
-          onClick={handleAdicionar}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
-          Adicionar Produto
+          {editando ? "Atualizar Produto" : "Cadastrar Produto"}
         </button>
+      </form>
 
-        <div className="mt-6">
-          <h2 className="text-xl font-semibold mb-2">Produtos cadastrados:</h2>
-          {produtos.length === 0 ? (
-            <p>Nenhum produto cadastrado ainda.</p>
-          ) : (
-            <table className="w-full table-auto bg-white shadow rounded">
-              <thead>
-                <tr className="bg-gray-200 text-left">
-                  <th className="p-2">Nome</th>
-                  <th className="p-2">Preço</th>
-                  <th className="p-2">Quantidade</th>
-                </tr>
-              </thead>
-              <tbody>
-                {produtos.map((produto) => (
-                  <tr key={produto._id} className="border-t">
-                    <td className="p-2">{produto.nome}</td>
-                    <td className="p-2">R$ {produto.preco.toFixed(2)}</td>
-                    <td className="p-2">{produto.quantidade}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
-      </main>
+      <h3 className="text-xl font-bold mt-10 mb-4">Produtos Cadastrados</h3>
+      <table className="w-full border-collapse">
+        <thead>
+          <tr>
+            <th className="border px-2 py-1 text-left">Nome</th>
+            <th className="border px-2 py-1 text-left">Preço</th>
+            <th className="border px-2 py-1 text-left">Quantidade</th>
+            <th className="border px-2 py-1 text-left">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {produtos.map((produto) => (
+            <tr key={produto.id}>
+              <td className="border px-2 py-1">{produto.nome}</td>
+              <td className="border px-2 py-1">R$ {produto.preco}</td>
+              <td className="border px-2 py-1">{produto.quantidade}</td>
+              <td className="border px-2 py-1">
+                <button
+                  onClick={() => iniciarEdicao(produto)}
+                  className="text-blue-600 hover:underline mr-2"
+                >
+                  Editar
+                </button>
+                <button
+                  onClick={() => excluirProduto(produto.id)}
+                  className="text-red-600 hover:underline"
+                >
+                  Excluir
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
-}
+};
 
 export default CadastroProdutoPage;
