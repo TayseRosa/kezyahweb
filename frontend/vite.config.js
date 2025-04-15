@@ -10,5 +10,6 @@ export default defineConfig({
   },
   server: {
     hmr: true,  // Garantir que o HMR esteja habilitado
+    port:5173
   },
 })
