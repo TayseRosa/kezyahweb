@@ -207,7 +207,7 @@ const CadastroUsuarioPage = () => {
               <ul className="user-list">
                 {usuarios.map((u, index) => (
                   <li className="user-item" key={index}>
-                    <span style={{ color:'#1e1e2f' }}>{u.nome} ({u.tipo})</span>
+                    <span style={{ color:'#141414' }}>{u.nome} ({u.tipo})</span>
                     <div className="user-actions">
                       <button onClick={() => alert("Função de edição ainda não implementada.")} title="Editar">
                         <Pencil size={18} color="#1e1e2f" />
