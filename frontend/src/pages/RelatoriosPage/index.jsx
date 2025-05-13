@@ -16,6 +16,9 @@ const RelatoriosPage = () => {
   const [vendas, setVendas] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  const isAdmin = usuario?.tipo === "admin";
+
   useEffect(() => {
     const token = localStorage.getItem("token")
     const fetchVendas = async () => {
@@ -295,15 +298,21 @@ const RelatoriosPage = () => {
             <div className="form-flex">
               <div className="bg-white rounded-2xl shadow p-4">
                 <h2 className="text-lg font-semibold mb-2">Total Geral</h2>
-                <p className="text-2xl text-green-600">{formatCurrency(totalGeral)}</p>
+                {!isAdmin ? 'Sem permissão para visualizar' : 
+                  <p className="text-2xl text-green-600">{formatCurrency(totalGeral)}</p>
+                }
               </div>
               <div className="bg-white rounded-2xl shadow p-4">
                 <h2 className="text-lg font-semibold mb-2">Total da Semana</h2>
-                <p className="text-2xl text-blue-600">{formatCurrency(totalSemana)}</p>
+                {!isAdmin ? 'Sem permissão para visualizar' : 
+                  <p className="text-2xl text-blue-600">{formatCurrency(totalSemana)}</p>
+                }
               </div>
               <div className="bg-white rounded-2xl shadow p-4">
                 <h2 className="text-lg font-semibold mb-2">Total do Mês</h2>
-                <p className="text-2xl text-purple-600">{formatCurrency(totalMes)}</p>
+                {!isAdmin ? 'Sem permissão para visualizar' : 
+                  <p className="text-2xl text-purple-600">{formatCurrency(totalMes)}</p>
+                }
               </div>
             </div>
 
@@ -312,6 +321,7 @@ const RelatoriosPage = () => {
               {/* Gráfico de Barras */}
               <div className="bg-white rounded-2xl shadow p-6">
                 <h2 className="text-xl font-semibold mb-4">Total Vendido por Vendedora</h2>
+                {!isAdmin ? 'Sem permissão para visualizar' : 
                 <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={dataBarChart}>
                     <XAxis dataKey="name" />
@@ -320,11 +330,13 @@ const RelatoriosPage = () => {
                     <Bar dataKey="total" fill="#8884d8" />
                   </BarChart>
                 </ResponsiveContainer>
+                }
               </div>
 
               {/* Gráfico de Pizza */}
               <div className="bg-white rounded-2xl shadow p-6">
                 <h2 className="text-xl font-semibold mb-4">Vendas Semana vs Mês</h2>
+                {!isAdmin ? 'Sem permissão para visualizar' : 
                 <ResponsiveContainer width="100%" height={300}>
                   <PieChart>
                     <Pie 
@@ -345,6 +357,7 @@ const RelatoriosPage = () => {
                     <Tooltip formatter={(value) => formatCurrency(value)} />
                   </PieChart>
                 </ResponsiveContainer>
+                }
               </div>
             </div>
           </div>

@@ -20,7 +20,11 @@ import { BarChart2 } from "lucide-react";
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#a29bfe", "#e17055"];
 
 function DashboardPage({ user }) {
+  
   const navigate = useNavigate();
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  const isAdmin = usuario?.tipo === "admin";
+
   const token = localStorage.getItem("token");
 
   const [activePage, setActivePage] = useState("Dashboard");
@@ -54,7 +58,8 @@ function DashboardPage({ user }) {
           setLoading(false);
         }
       };
-  
+
+      
       fetchVendas();
     }, []);
   
@@ -114,6 +119,7 @@ function DashboardPage({ user }) {
 
     useEffect(() => {
       const token = localStorage.getItem("token");
+
 
       fetch("http://localhost:5000/api/dashboard")
         .then((res) => res.json())
@@ -176,6 +182,11 @@ function DashboardPage({ user }) {
   ];
 
   const pieColors = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042"];
+
+  useEffect(()=>{
+    console.log("***TIPO***", isAdmin)
+
+  },[isAdmin])
 
   return (
     <div className="layout">
@@ -301,48 +312,56 @@ function DashboardPage({ user }) {
 <div style={{ display:'flex', justifyContent:'space-between', background:'transparent' }}>
           <div className="card" style={{ margin:20 }}>
       
-
               {/* Gráficos */}
               <div className="form-flex" style={{ display: 'flex', justifyContent: 'space-between', gap: '20px', flexWrap: 'wrap' }}>
-  {/* Gráfico de Barras */}
-  <div className="bg-white rounded-2xl shadow p-6" style={{ flex: 1, minWidth: '300px' }}>
-    <h2 className="text-xl font-semibold mb-4">Total Vendido por Vendedora</h2>
-    <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={dataBarChart}>
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip formatter={(value) => formatCurrency(value)} />
-        <Bar dataKey="total" fill="#8884d8" />
-      </BarChart>
-    </ResponsiveContainer>
-  </div>
 
-  {/* Gráfico de Pizza */}
-  <div className="bg-white rounded-2xl shadow p-6" style={{ flex: 1, minWidth: '300px' }}>
-    <h2 className="text-xl font-semibold mb-4">Vendas Semana vs Mês</h2>
-    <ResponsiveContainer width="100%" height={300}>
-      <PieChart>
-        <Pie 
-          data={dataPieChart} 
-          dataKey="value" 
-          nameKey="name" 
-          cx="50%" 
-          cy="50%" 
-          outerRadius={80} 
-          fill="#8884d8"
-          label
-        >
-          {dataPieChart.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-        <Legend />
-        <Tooltip formatter={(value) => formatCurrency(value)} />
-      </PieChart>
-    </ResponsiveContainer>
-  </div>
-</div>
+                {/* Gráfico de Barras */}
+                <div className="bg-white rounded-2xl shadow p-6" style={{ flex: 1, minWidth: '300px', color:'#000' }}>
+                  {!isAdmin ? 'Sem permissão para visualizar' : 
+                  <>
+                  <h2 className="text-xl font-semibold mb-4">Total Vendido por Vendedora</h2>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <BarChart data={dataBarChart}>
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip formatter={(value) => formatCurrency(value)} />
+                      <Bar dataKey="total" fill="#8884d8" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                  </>
+                  }
+                </div>
 
+                {/* Gráfico de Pizza */}
+                <div className="bg-white rounded-2xl shadow p-6" style={{ flex: 1, minWidth: '300px', color:'#000' }}>
+                {!isAdmin ? 'Sem permissão para visualizar' : 
+                  <>
+                    <h2 className="text-xl font-semibold mb-4">Vendas Semana vs Mês</h2>
+                    <ResponsiveContainer width="100%" height={300}>
+                      <PieChart>
+                        <Pie 
+                          data={dataPieChart} 
+                          dataKey="value" 
+                          nameKey="name" 
+                          cx="50%" 
+                          cy="50%" 
+                          outerRadius={80} 
+                          fill="#8884d8"
+                          label
+                        >
+                          {dataPieChart.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                          ))}
+                        </Pie>
+                        <Legend />
+                        <Tooltip formatter={(value) => formatCurrency(value)} />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </>
+                }
+                </div>
+              
+              </div>
           </div>
 
 

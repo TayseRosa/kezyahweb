@@ -12,6 +12,9 @@ const ListaProdutosPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  const isAdmin = usuario?.tipo === "admin";
+
   const fetchProducts = async () => {
     const token = localStorage.getItem("token")
 
@@ -120,8 +123,9 @@ const ListaProdutosPage = () => {
               + novo produto
             </Link>
           </div>
-
+          
           {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
+          
           {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
           {produtos.length > 0 ? (
@@ -274,12 +278,17 @@ const ListaProdutosPage = () => {
                     </td>
 
                     <td className="icons">
+                    {!isAdmin ? 'x ' : 
                       <button onClick={() => handleEdit(produto._id)}>
                         <FaEdit color="green" />
                       </button>
+                    }
+
+                    {!isAdmin ? 'x ' : 
                       <button onClick={() => handleDelete(produto._id)}>
                         <FaTrash color="red" />
                       </button>
+                    }
                     </td>
                   </tr>
                 ))}

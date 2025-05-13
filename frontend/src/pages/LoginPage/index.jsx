@@ -30,6 +30,7 @@ function LoginPage({ onLogin }) {
       // Salvar token e dados do usuário (pode ser no localStorage, se preferir)
       localStorage.setItem("token", data.token);
       localStorage.setItem("usuario", JSON.stringify(data.usuario));
+      //localStorage.setItem("tipo", usuario.tipo)
 
       // Notificar o app que o usuário está logado
       onLogin(data.usuario);
