@@ -1,0 +1,31 @@
+
+button.btnBlue{
+  background-color: #240561;
+  color: #ffffff;
+  border: 0;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: 0.5s;
+  cursor: pointer;
+  }
+
+  button.btnBlue:hover{
+    background-color: #240561b9;
+    border:1px solid #240561;
+    }
+
+
+    button.btnGreen{
+        background-color: #007f00;
+        color: #ffffff;
+        border: 0;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: 0.5s;
+        cursor: pointer;
+        }
+      
+    button.btnGreen:hover{
+        background-color: #007f00b7;
+        border:1px solid #007f00;
+    }

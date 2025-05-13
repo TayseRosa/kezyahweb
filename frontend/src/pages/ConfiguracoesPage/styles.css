@@ -1,0 +1,136 @@
+.configuracoes-page {
+  display: flex;
+  min-height: 100vh;
+  min-width: 1280px;
+}
+
+.configuracoes-content {
+  flex: 1;
+  padding: 30px;
+  background-color: #f5f5f5;
+}
+
+.configuracoes-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+.configuracoes-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.configuracoes-form input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.save-button {
+  margin-top: 20px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.save-button:hover {
+  background-color: #45a049;
+}
+
+h1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 28px;
+}
+
+.configuracoes-page {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .configuracoes-content {
+    flex: 1;
+    padding: 30px;
+    background-color: #f5f5f5;
+  }
+  
+  .configuracoes-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    margin-top: 20px;
+  }
+  
+  .configuracoes-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .configuracoes-form input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .btnTab {
+    background-color: #ccc;
+    color: #1E1E2F;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btnTab:hover {
+    background-color: #bbb;
+  }
+  
+  
+  .save-button {
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .save-button:hover {
+    background-color: #45a049;
+  }
+  
+  h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 28px;
+    color:#252525;
+  }
+  
+  label{
+    color:#252525;
+  }
+
+  input{
+    background-color: rgba(36, 5, 97, 0.592);
+  }

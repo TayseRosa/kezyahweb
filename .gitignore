@@ -1,0 +1,44 @@
+# GERAL
+*.env
+*.log
+.DS_Store
+Thumbs.db
+node_modules/
+temp/
+tmp/
+*.bak
+*.swp
+*.swo
+logs/
+
+# BACKEND (Node + Express)
+/backend/node_modules/
+/backend/.env
+/backend/dist/
+/backend/coverage/
+/backend/logs/
+/backend/*.log
+/backend/*.bak
+
+# FRONTEND (React)
+/frontend/node_modules/
+/frontend/.env
+/frontend/build/
+/frontend/coverage/
+/frontend/*.log
+/frontend/*.bak
+
+# TESTES
+coverage/
+*.lcov
+
+# EDITORES E SISTEMAS
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# SISTEMA OPERACIONAL
+ehthumbs.db
+Icon?
+Desktop.ini
