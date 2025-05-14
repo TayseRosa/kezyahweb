@@ -73,10 +73,8 @@ Este é um sistema completo de controle de vendas e estoque com autenticação J
 
 ### 🧠 Pré-requisitos
 - Node.js instalado
-- MongoDB rodando localmente ou em nuvem (ex: MongoDB Atlas)
-- Yarn ou NPM
-- (Opcional) Docker
-
+- MongoDB rodando em nuvem (MongoDB Atlas)
+- NPM
 ---
 
 ### 📦 Backend
@@ -91,8 +89,6 @@ cd backend
 
 ```bash
 npm install
-# ou
-yarn install
 ```
 
 3. Crie um arquivo `.env` com as variáveis:
@@ -154,7 +150,7 @@ Após a finalização do sistema web, será desenvolvido um app em React Native 
 ## 📌 Observações
 - O sistema é modular e pode ser facilmente escalado.
 - Toda a comunicação com o backend é protegida com JWT.
-- Recomendado usar Docker + MongoDB Atlas em produção.
+- Recomendado usar MongoDB Atlas em produção.
 
 ---
 
