@@ -23,7 +23,7 @@ const RelatoriosPage = () => {
     const token = localStorage.getItem("token")
     const fetchVendas = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/sales",{
+        const response = await fetch("https://kezyahweb.onrender.com/api/sales",{
           method:'GET',
           headers:{
             'Content-Type':'application/json',

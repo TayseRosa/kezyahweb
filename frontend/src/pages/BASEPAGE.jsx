@@ -12,7 +12,7 @@ const ConfiguracoesPage = () => {
   // Função para buscar os tamanhos cadastrados
   const fetchTamanhos = async () => {
     try {
-      const response = await fetch("http://localhost:5000/"); // Substitua pela URL da sua API
+      const response = await fetch("https://kezyahweb.onrender.com/"); // Substitua pela URL da sua API
       const data = await response.json();
       setTamanhos(data); // Atualiza o estado com os tamanhos retornados
     } catch (error) {
@@ -33,8 +33,8 @@ const ConfiguracoesPage = () => {
     }
 
     const url = editingId
-      ? `http://localhost:5000/${editingId}` // URL para edição
-      : "http://localhost:5000/sizes"; // URL para cadastro
+      ? `https://kezyahweb.onrender.com/${editingId}` // URL para edição
+      : "https://kezyahweb.onrender.com/sizes"; // URL para cadastro
 
     const method = editingId ? "PUT" : "POST"; // Se houver edição, usa PUT, caso contrário POST
 
@@ -78,7 +78,7 @@ const ConfiguracoesPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/${id}`, {
+      const response = await fetch(`https://kezyahweb.onrender.com/${id}`, {
         method: "DELETE",
       });
 

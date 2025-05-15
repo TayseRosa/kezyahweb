@@ -43,7 +43,7 @@ function DashboardPage({ user }) {
         const token = localStorage.getItem("token");
 
         try {
-          const response = await fetch("http://localhost:5000/api/sales", {
+          const response = await fetch("https://kezyahweb.onrender.com/api/sales", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -121,7 +121,7 @@ function DashboardPage({ user }) {
       const token = localStorage.getItem("token");
 
 
-      fetch("http://localhost:5000/api/dashboard")
+      fetch("https://kezyahweb.onrender.com/api/dashboard")
         .then((res) => res.json())
         .then((data) => {
           if (data && data.length > 0) {

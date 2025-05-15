@@ -24,7 +24,7 @@ const CadastroProdutoPage = () => {
     const token = localStorage.getItem('token')
 
     try {
-      const response = await fetch("http://localhost:5000/api/products",{
+      const response = await fetch("https://kezyahweb.onrender.com/api/products",{
         method:'GET',
         headers:{
           'Content-Type':'application/json',
@@ -57,8 +57,8 @@ const CadastroProdutoPage = () => {
     }
 
     const url = editingId
-      ? `http://localhost:5000/api/products/${editingId}` // URL para edição
-      : "http://localhost:5000/api/products/"; // URL para cadastro
+      ? `https://kezyahweb.onrender.com/api/products/${editingId}` // URL para edição
+      : "https://kezyahweb.onrender.com/api/products/"; // URL para cadastro
 
     const method = editingId ? "PUT" : "POST"; // Se houver edição, usa PUT, caso contrário POST
 
@@ -105,7 +105,7 @@ const CadastroProdutoPage = () => {
   const handleDelete = async (id) => {
     const token = localStorage.getItem("token")
     try {
-      const response = await fetch(`http://localhost:5000/api/products/${id}`, {
+      const response = await fetch(`https://kezyahweb.onrender.com/api/products/${id}`, {
         method: "DELETE",
         Authorization: `Bearer ${token}`
       });

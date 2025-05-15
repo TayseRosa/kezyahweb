@@ -15,7 +15,7 @@ const CadastroTamanhoPage = () => {
     const token = localStorage.getItem("token")
 
     try {
-      const response = await fetch("http://localhost:5000/", {
+      const response = await fetch("https://kezyahweb.onrender.com/", {
         method:'GET',
         headers:{
           'Content-Type': 'application/json',
@@ -44,8 +44,8 @@ const CadastroTamanhoPage = () => {
     }
 
     const url = editingId
-      ? `http://localhost:5000/${editingId}` // URL para edição
-      : "http://localhost:5000/sizes"; // URL para cadastro
+      ? `https://kezyahweb.onrender.com/${editingId}` // URL para edição
+      : "https://kezyahweb.onrender.com/sizes"; // URL para cadastro
 
     const method = editingId ? "PUT" : "POST"; // Se houver edição, usa PUT, caso contrário POST
 
@@ -92,7 +92,7 @@ const CadastroTamanhoPage = () => {
   const handleDelete = async (id) => {
     const token = localStorage.getItem("token")
     try {
-      const response = await fetch(`http://localhost:5000/${id}`, {
+      const response = await fetch(`https://kezyahweb.onrender.com/${id}`, {
         method: "DELETE",
         headers:{
           'Content-Type': 'application/json',

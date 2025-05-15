@@ -19,7 +19,7 @@ const ListaProdutosPage = () => {
     const token = localStorage.getItem("token")
 
     try {
-      const response = await fetch("http://localhost:5000/api/products",{
+      const response = await fetch("https://kezyahweb.onrender.com/api/products",{
         method:'GET',
         headers:{
           'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ const ListaProdutosPage = () => {
     const token = localStorage.getItem("token")
     if (e.key === "Enter") {
       try {
-        const response = await fetch(`http://localhost:5000/api/products/${editingId}`, {
+        const response = await fetch(`https://kezyahweb.onrender.com/api/products/${editingId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -88,7 +88,7 @@ const ListaProdutosPage = () => {
     if (!window.confirm("Tem certeza que deseja excluir este item?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/products/${id}`, {
+      const response = await fetch(`https://kezyahweb.onrender.com/api/products/${id}`, {
         method: "DELETE",
         headers:{
           'Content-Type':'application/json',

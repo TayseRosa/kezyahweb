@@ -28,7 +28,7 @@ const ConfiguracoesPage = () => {
   useEffect(() => {
     async function fetchConfiguracoes() {
       try {
-        const response = await fetch('http://localhost:5000/api/configuracoes');
+        const response = await fetch('https://kezyahweb.onrender.com/api/configuracoes');
         if (response.ok) {
           const data = await response.json();
           if (data) {
@@ -45,7 +45,7 @@ const ConfiguracoesPage = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const configResponse = await fetch('http://localhost:5000/api/configuracoes');
+        const configResponse = await fetch('https://kezyahweb.onrender.com/api/configuracoes');
         if (configResponse.ok) {
           const configData = await configResponse.json();
           if (configData) {
@@ -65,7 +65,7 @@ const ConfiguracoesPage = () => {
 
   const fetchUsuarios = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/usuarios');
+      const response = await fetch('https://kezyahweb.onrender.com/api/usuarios');
       if (response.ok) {
         const data = await response.json();
         data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -81,7 +81,7 @@ const ConfiguracoesPage = () => {
     e.preventDefault();
     try {
       const method = configuracoes._id ? 'PUT' : 'POST';
-      const response = await fetch('http://localhost:5000/api/configuracoes', {
+      const response = await fetch('https://kezyahweb.onrender.com/api/configuracoes', {
         method,
         headers: {
           'Content-Type': 'application/json',
@@ -105,8 +105,8 @@ const ConfiguracoesPage = () => {
     e.preventDefault();
     try {
       const url = usuarioEditado
-        ? `http://localhost:5000/api/usuarios/${usuarioEditado._id}`
-        : 'http://localhost:5000/api/usuarios';
+        ? `https://kezyahweb.onrender.com/api/usuarios/${usuarioEditado._id}`
+        : 'https://kezyahweb.onrender.com/api/usuarios';
       const method = usuarioEditado ? 'PUT' : 'POST';
   
       // Monta o corpo da requisição
@@ -175,7 +175,7 @@ const ConfiguracoesPage = () => {
 
   const handleExcluirUsuario = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/usuarios/${id}`, {
+      const response = await fetch(`https://kezyahweb.onrender.com/api/usuarios/${id}`, {
         method: 'DELETE',
       });
 

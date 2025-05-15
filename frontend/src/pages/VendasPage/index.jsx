@@ -26,7 +26,7 @@ const VendasPage = () => {
     async function fetchProdutos() {
       const token = localStorage.getItem("token");
       try {
-        const response = await fetch('http://localhost:5000/api/products', {
+        const response = await fetch('https://kezyahweb.onrender.com/api/products', {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -44,7 +44,7 @@ const VendasPage = () => {
       const token = localStorage.getItem("token")
 
       try {
-        const response = await fetch('http://localhost:5000/',{
+        const response = await fetch('https://kezyahweb.onrender.com/',{
         method:"GET",
         headers: {
           'Content-Type': 'application/json',
@@ -178,7 +178,7 @@ const VendasPage = () => {
       const token = localStorage.getItem("token")
       console.log("***Token enviado***:", token);
 
-      const response = await fetch('http://localhost:5000/api/sales', {
+      const response = await fetch('https://kezyahweb.onrender.com/api/sales', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
